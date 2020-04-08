@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/client")
-
 public final class ClientService {
 	
 	private final ClientController clientController;
@@ -24,44 +23,38 @@ public final class ClientService {
 		this.clientController = clientController;
 	}
 	
-	/*Método que cadastra um clientDTO específico e um por vez usando um json(payload) para a população dos atributos
-	do objeto de client instânciado*/
 	@PostMapping("/add")
 	public void addClient(@RequestBody ClientDTO client) {
-       clientController.insertClient(client);
+       clientController.addClient(client);
 	}
 	
-	/*Método que atualiza um ClientDTO dentro do array clients, substituindo o antigo ClientDTO por um novo*/
 	@PutMapping("/{id}")
 	public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO updateClient){
 		ClientDTO client = this.clientController.updateClient(id, updateClient);
-		if(client.equals(ClientDTO.NULL_VALUE)) {
+		if(ClientDTO.NULL_VALUE.equals(client)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(client, HttpStatus.OK);
 	}
 	
-	//Esse método mostra a lista de clients sem aumentá-la
 	@GetMapping("/list")
 	public List<ClientDTO> list(){
 		return this.clientController.getAllClients();
 	}
     
-	/*Esse método mostra os valores dos atributos de tal client dentro do arrayList clients*/
 	@GetMapping("/{id}/details")
 	public ResponseEntity<ClientDTO> details(@PathVariable Long id) {
 		ClientDTO client = this.clientController.getClient(id);
-		if(client.equals(ClientDTO.NULL_VALUE)) {
+		if(ClientDTO.NULL_VALUE.equals(client)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(client, HttpStatus.OK);
 	}
 	
-	/*Esse método exclui um ClientDTO do arrayList*/
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ClientDTO> removeClient(@PathVariable Long id) {
 		ClientDTO client = this.clientController.removeClient(id);
-		if(client.equals(ClientDTO.NULL_VALUE)) {
+		if(ClientDTO.NULL_VALUE.equals(client)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(client, HttpStatus.OK);
