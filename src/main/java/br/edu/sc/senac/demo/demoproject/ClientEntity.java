@@ -12,15 +12,15 @@ public class ClientEntity implements Serializable{
 
 	private static final long serialVersionUID = 5552665667774276903L;	
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id//Serve para criar uma PK
+	@GeneratedValue(strategy = GenerationType.AUTO)//Gera um valor aleatório para a PK
+	private long id;
 	
 	private String nome;
 	
 	private String dataNascimento;
 	
 	private String email;
-	
 	
 	public ClientEntity(String nome, String dataNascimento, String email) {
 		this.nome = nome;
@@ -30,7 +30,7 @@ public class ClientEntity implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "nome = " + this.nome + "Data de nascimento = " + this.dataNascimento + "Email = " + this.email;
+		return "Nome = " + this.nome + "Data de nascimento = " + this.dataNascimento + "Email = " + this.email;
 	}
 
 	public String getNome() {
@@ -62,7 +62,12 @@ public class ClientEntity implements Serializable{
 			this.email = email;
 		}
 	}
-	
-	
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }
