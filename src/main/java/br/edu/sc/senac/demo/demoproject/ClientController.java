@@ -2,6 +2,7 @@ package br.edu.sc.senac.demo.demoproject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 
@@ -60,7 +61,7 @@ final class ClientController {
 		return oldClient;
 	}
 
-	//Faz o parse de um Entity para DTO
+	//Faz a instância de um DTO com um Entity
 	private static ClientDTO toDTO(final ClientEntity clientEntity) {
 		final String nome = clientEntity.getNome();
 		final String dataNascimento = clientEntity.getDataNascimento();
@@ -68,12 +69,21 @@ final class ClientController {
 		return new ClientDTO(nome, dataNascimento, email);
 	}
 
-	//Retorna a lista de clients com os Entity já colocados dentro dessa lista
+	//Retorna a lista de clients com os Entity já convertidos em DTO e colocados dentro dessa lista
 	List<ClientDTO> getAllClientsDTO() {
 		Iterable<ClientEntity> entities = this.clientRepository.findAll();
 		for (ClientEntity clientEntity : entities) {
 			clients.add(ClientController.toDTO(clientEntity));
 		}
 		return clients;
+	}
+	
+	//Retorna um DTO através de um Entity
+	ClientDTO getClientFromRepository(long id) {
+		Optional<ClientEntity> optionalClient = this.clientRepository.findById(id);
+		if(optionalClient.isPresent()) {
+			return ClientController.toDTO(optionalClient.get());
+		}
+		return ClientDTO.NULL_VALUE;
 	}
 }

@@ -1,6 +1,6 @@
 package br.edu.sc.senac.demo.demoproject;
 
-// Classe que simulou o Banco de Dados
+//Classe que simulou o Banco de Dados
 
 public class ClientDTO {
 	
