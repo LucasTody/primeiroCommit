@@ -86,4 +86,15 @@ final class ClientController {
 		}
 		return ClientDTO.NULL_VALUE;
 	}
+	
+	//Remove um Entity do repositório
+	ClientDTO removeClientFromRepository(long id) {
+		Optional<ClientEntity> optionalClient = this.clientRepository.findById(id);
+		if(optionalClient.isPresent()) {
+			ClientEntity client = optionalClient.get();
+			this.clientRepository.delete(client);
+			return ClientController.toDTO(client);
+		}
+		return ClientDTO.NULL_VALUE;
+	}
 }
