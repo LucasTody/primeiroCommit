@@ -115,6 +115,19 @@ final class ClientController {
 		return clientInsert.getId();
 	}
 	
+	//Método que atualiza o Entity
+	ClientDTO updateClient(long id, ClientDTO client){
+		Optional<ClientEntity> optionalClient = this.clientRepository.findById(id);
+		if(optionalClient.isPresent()) {
+			ClientEntity clientEntity = optionalClient.get();
+			ClientDTO oldClient = ClientController.toDTO(clientEntity);
+			ClientController.updateEntityFromClientDTO(oldClient, clientEntity);
+			this.clientRepository.save(clientEntity);
+			return oldClient;
+		}
+		return ClientDTO.NULL_VALUE;
+	}
+	
 	//Atualiza um Entity a partir de um DTO
 	private static void updateEntityFromClientDTO(ClientDTO client, ClientEntity clientEntity) {
 		clientEntity.setNome(client.getNome());
