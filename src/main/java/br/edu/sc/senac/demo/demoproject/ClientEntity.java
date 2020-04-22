@@ -22,7 +22,8 @@ public class ClientEntity implements Serializable{
 	
 	private String email;
 	
-	public ClientEntity(String nome, String dataNascimento, String email) {
+	public ClientEntity(long id, String nome, String dataNascimento, String email) {
+		this.id = id;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
