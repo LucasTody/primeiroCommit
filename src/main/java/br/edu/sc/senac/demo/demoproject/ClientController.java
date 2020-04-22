@@ -62,11 +62,12 @@ final class ClientController {
 	}
 
 	//Faz a instância de um DTO com um Entity
-	private static ClientDTO toDTO(final ClientEntity clientEntity) {
-		final String nome = clientEntity.getNome();
-		final String dataNascimento = clientEntity.getDataNascimento();
-		final String email = clientEntity.getEmail();
-		return new ClientDTO(nome, dataNascimento, email);
+	private static ClientDTO toDTO(ClientEntity clientEntity) {
+		long id = clientEntity.getId();
+		String nome = clientEntity.getNome();
+		String dataNascimento = clientEntity.getDataNascimento();
+		String email = clientEntity.getEmail();
+		return new ClientDTO(id, nome, dataNascimento, email);
 	}
 
 	//Retorna a lista de clients com os Entity já convertidos em DTO e colocados dentro dessa lista
