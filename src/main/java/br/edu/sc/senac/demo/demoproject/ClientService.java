@@ -25,7 +25,7 @@ public final class ClientService {
 	
 	@PostMapping("/add")
 	public void addClient(@RequestBody ClientDTO client) {
-       clientController.addClient(client);
+       clientController.insertClientIntoRepository(client);
 	}
 	
 	@PutMapping("/{id}")
@@ -44,7 +44,7 @@ public final class ClientService {
     
 	@GetMapping("/{id}/details")
 	public ResponseEntity<ClientDTO> details(@PathVariable Long id) {
-		ClientDTO client = this.clientController.getClient(id);
+		ClientDTO client = this.clientController.getClientFromRepository(id);
 		if(ClientDTO.NULL_VALUE.equals(client)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -53,7 +53,7 @@ public final class ClientService {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ClientDTO> removeClient(@PathVariable Long id) {
-		ClientDTO client = this.clientController.removeClient(id);
+		ClientDTO client = this.clientController.removeClientFromRepository(id);
 		if(ClientDTO.NULL_VALUE.equals(client)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

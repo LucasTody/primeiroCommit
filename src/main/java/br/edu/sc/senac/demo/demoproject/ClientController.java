@@ -18,49 +18,6 @@ final class ClientController {
 	//Lista de ClientDTO
 	private List<ClientDTO> clients = new ArrayList<>();
 
-	//Retorna todos os ClientDTO dentro da lista 
-	List<ClientDTO> getAllClients() {
-		return this.clients;
-	}
-
-	//Adiciona um ClientDTO dentro da lista clients
-	Long addClient(ClientDTO client) {
-		clients.add(client);
-		Long id = Long.valueOf(clients.size() - 1);
-		return id;
-	}
-
-	//Retorna um ClientDTO dentro da lista
-	ClientDTO getClient(Long id) {
-		if (id >= clients.size() || id < 0) {
-			return ClientDTO.NULL_VALUE;
-		}
-		int index = id.intValue();
-		ClientDTO client = clients.get(index);
-		return client;
-	}
-
-	//Remove um ClientDTO dentro da lista
-	ClientDTO removeClient(Long id) {
-		if (id >= clients.size() || id < 0) {
-			return ClientDTO.NULL_VALUE;
-		}
-		int index = id.intValue();
-		ClientDTO client = clients.remove(index);
-		return client;
-	}
-
-	//Substitui um ClientDTO por outro
-	ClientDTO updateClient(Long id, ClientDTO updateClient) {
-		if (id >= clients.size() || id < 0) {
-			return ClientDTO.NULL_VALUE;
-		}
-		int index = id.intValue();
-		ClientDTO oldClient = clients.remove(index);
-		clients.add(index, updateClient);
-		return oldClient;
-	}
-
 	//Faz a instância de um DTO com um Entity
 	private static ClientDTO toDTO(ClientEntity clientEntity) {
 		long id = clientEntity.getId();
@@ -80,7 +37,7 @@ final class ClientController {
 	}
 
 	//Retorna a lista de clients com os Entity já convertidos em DTO e colocados dentro dessa lista
-	List<ClientDTO> getAllClientsDTO() {
+	List<ClientDTO> getAllClients() {
 		Iterable<ClientEntity> entities = this.clientRepository.findAll();
 		for (ClientEntity clientEntity : entities) {
 			clients.add(ClientController.toDTO(clientEntity));
