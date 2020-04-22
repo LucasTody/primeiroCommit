@@ -114,4 +114,11 @@ final class ClientController {
 		clientRepository.save(clientInsert);
 		return clientInsert.getId();
 	}
+	
+	//Atualiza um Entity a partir de um DTO
+	private static void updateEntityFromClientDTO(ClientDTO client, ClientEntity clientEntity) {
+		clientEntity.setNome(client.getNome());
+		clientEntity.setDataNascimento(client.getDataNascimento());
+		clientEntity.setEmail(client.getEmail());
+	}
 }
