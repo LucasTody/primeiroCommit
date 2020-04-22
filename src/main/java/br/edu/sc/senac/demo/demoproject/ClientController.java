@@ -108,5 +108,10 @@ final class ClientController {
 		return ClientDTO.NULL_VALUE;
 	}
 	
-	//
+	//Adiciona um Entity ao repositório
+	Long insertClientIntoRepository(ClientDTO client) {
+		ClientEntity clientInsert = ClientController.toEntity(client);
+		clientRepository.save(clientInsert);
+		return clientInsert.getId();
+	}
 }
