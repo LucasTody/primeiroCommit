@@ -6,7 +6,7 @@ public class ClientDTO {
 	
 	public static final ClientDTO NULL_VALUE = new ClientDTO(0, "", "", "");
 	
-	private long id;
+	private Long id;
 	private String nome;
 	private String dataNascimento;
 	private String email;
@@ -18,7 +18,7 @@ public class ClientDTO {
 		this.email = email;
 	}
 
-	public long getid() {
+	public Long getid() {
 		return this.id;
 	}
 	

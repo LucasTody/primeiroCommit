@@ -15,12 +15,9 @@ final class ClientController {
 		this.clientRepository = clientRepository;
 	}
 
-	//Lista de ClientDTO
-	private List<ClientDTO> clients = new ArrayList<>();
-
 	//Faz a instância de um DTO com um Entity
 	private static ClientDTO toDTO(ClientEntity clientEntity) {
-		long id = clientEntity.getId();
+		Long id = clientEntity.getId();
 		String nome = clientEntity.getNome();
 		String dataNascimento = clientEntity.getDataNascimento();
 		String email = clientEntity.getEmail();
@@ -29,7 +26,7 @@ final class ClientController {
 	
 	//Faz a instãncia de um Entity a partir de um DTO
 	private static ClientEntity toEntity(ClientDTO client) {
-		long id = client.getid();
+		Long id = client.getid();
 		String nome = client.getNome();
 		String dataNascimento = client.getDataNascimento();
 		String email = client.getEmail();
@@ -38,6 +35,7 @@ final class ClientController {
 
 	//Retorna a lista de clients com os Entity já convertidos em DTO e colocados dentro dessa lista
 	List<ClientDTO> getAllClients() {
+		ArrayList<ClientDTO> clients = new ArrayList<>();
 		Iterable<ClientEntity> entities = this.clientRepository.findAll();
 		for (ClientEntity clientEntity : entities) {
 			clients.add(ClientController.toDTO(clientEntity));
@@ -46,7 +44,7 @@ final class ClientController {
 	}
 	
 	//Retorna um DTO através de um Entity
-	ClientDTO getClientFromRepository(long id) {
+	ClientDTO getClientFromRepository(Long id) {
 		Optional<ClientEntity> optionalClient = this.clientRepository.findById(id);
 		if(optionalClient.isPresent()) {
 			return ClientController.toDTO(optionalClient.get());
@@ -73,7 +71,7 @@ final class ClientController {
 	}
 	
 	//Método que atualiza o Entity
-	ClientDTO updateClient(long id, ClientDTO client){
+	ClientDTO updateClient(Long id, ClientDTO client){
 		Optional<ClientEntity> optionalClient = this.clientRepository.findById(id);
 		if(optionalClient.isPresent()) {
 			ClientEntity clientEntity = optionalClient.get();

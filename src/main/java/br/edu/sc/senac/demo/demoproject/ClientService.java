@@ -23,9 +23,13 @@ public final class ClientService {
 		this.clientController = clientController;
 	}
 	
+	/**
+	 * Realiza a inserção de clientes no banco de dados.
+	 * @param client um DTO de cliente.
+	 */
 	@PostMapping("/add")
-	public void addClient(@RequestBody ClientDTO client) {
-       clientController.insertClientIntoRepository(client);
+	public Long addClient(@RequestBody ClientDTO client) {
+       return clientController.insertClientIntoRepository(client);
 	}
 	
 	@PutMapping("/{id}")

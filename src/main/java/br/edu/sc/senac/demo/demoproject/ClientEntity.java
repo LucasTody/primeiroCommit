@@ -14,7 +14,7 @@ public class ClientEntity implements Serializable{
 	
 	@Id//Serve para criar uma PK
 	@GeneratedValue(strategy = GenerationType.AUTO)//Gera um valor aleatório para a PK
-	private long id;
+	private Long id;
 	
 	private String nome;
 	
@@ -22,11 +22,15 @@ public class ClientEntity implements Serializable{
 	
 	private String email;
 	
-	public ClientEntity(long id, String nome, String dataNascimento, String email) {
+	public ClientEntity(Long id, String nome, String dataNascimento, String email) {
 		this.id = id;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
+	}
+	
+	protected ClientEntity() {
+		
 	}
 	
 	@Override
@@ -64,11 +68,11 @@ public class ClientEntity implements Serializable{
 		}
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 }
